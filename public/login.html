@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Officer Login - Traffic Fine Management System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body class="home-bg">
+  <header>
+    <h1>Officer Login</h1>
+    <p class="subtitle">Please enter your Badge Number to continue</p>
+  </header>
+  <main>
+    <div class="card">
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="badgeNumber">Badge Number</label>
+          <input type="text" id="badgeNumber" placeholder="Enter Badge Number" required />
+        </div>
+        <button type="submit">Login</button>
+      </form>
+      <div id="loginMsg"></div>
+    </div>
+    <footer>
+      <p>&copy; 2025 Traffic Fine Management System. All rights reserved.</p>
+    </footer>
+  </main>
+  <script>
+    document.getElementById('loginForm').onsubmit = function(e) {
+      e.preventDefault();
+      const badgeNumber = document.getElementById('badgeNumber').value.trim();
+      const loginMsg = document.getElementById('loginMsg');
+      loginMsg.style.color = '#d7263d';
+      if (!badgeNumber) {
+        loginMsg.innerText = 'Please enter your badge number.';
+        return;
+      }
+      fetch('/api/officer-login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ badgeNumber })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          loginMsg.style.color = 'green';
+          loginMsg.innerText = 'Login successful! Redirecting...';
+          setTimeout(() => {
+            window.location.href = 'index.html';
+          }, 1000);
+        } else {
+          loginMsg.innerText = data.message || 'Invalid badge number.';
+        }
+      })
+      .catch(() => {
+        loginMsg.innerText = 'Error logging in. Please try again.';
+      });
+    };
+  </script>
+</body>
+</html>

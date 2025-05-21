@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Fines Result</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body class="results-bg">
+  <header>
+    <h1>Fines Found</h1>
+    <p class="subtitle">Your Traffic Fine Details</p>
+  </header>
+  <main>
+    <div class="card">
+      <table id="finesTable">
+        <thead>
+          <tr>
+            <th>Fine ID</th>
+            <th>Amount</th>
+            <th>Due Date</th>
+            <th>Status</th>
+            <th>Late Fee</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <div id="noResults"></div>
+    </div>
+    <footer>
+      <p>&copy; 2025 Traffic Fine Management System. All rights reserved.</p>
+    </footer>
+  </main>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const reg = params.get("reg");
+    const phone = params.get("phone");
+
+    fetch(`/api/fines?reg=${reg}&phone=${phone}`)
+      .then(res => res.json())
+      .then(data => {
+        const tbody = document.querySelector("#finesTable tbody");
+        const noResults = document.getElementById("noResults");
+        const finesTable = document.getElementById("finesTable");
+        tbody.innerHTML = '';
+        if (data && data.fines) {
+          if (data.fines.length === 0) {
+            noResults.innerText = "No fines found for the given details.";
+            finesTable.style.display = "none";
+            return;
+          }
+          data.fines.forEach(fine => {
+            const row = `
+              <tr>
+                <td>${fine.Fine_ID}</td>
+                <td>₹${fine.Amount}</td>
+                <td>${fine.Due_Date}</td>
+                <td>${fine.Payment_Status}</td>
+                <td>₹${fine.Late_Fee}</td>
+              </tr>
+            `;
+            tbody.innerHTML += row;
+          });
+          if (typeof data.totalFine !== 'undefined') {
+            noResults.innerHTML = `<b>Total Fine for this Vehicle: ₹${data.totalFine}</b>`;
+          } else {
+            noResults.innerText = '';
+          }
+        } else if (Array.isArray(data)) {
+          if (data.length === 0) {
+            noResults.innerText = "No fines found for the given details.";
+            finesTable.style.display = "none";
+            return;
+          }
+          data.forEach(fine => {
+            const row = `
+              <tr>
+                <td>${fine.Fine_ID}</td>
+                <td>₹${fine.Amount}</td>
+                <td>${fine.Due_Date}</td>
+                <td>${fine.Payment_Status}</td>
+                <td>₹${fine.Late_Fee}</td>
+              </tr>
+            `;
+            tbody.innerHTML += row;
+          });
+          noResults.innerText = '';
+        } else if (data && data.message) {
+          noResults.innerText = data.message;
+          finesTable.style.display = "none";
+        } else {
+          noResults.innerText = "Unexpected response from server.";
+          finesTable.style.display = "none";
+        }
+      })
+      .catch(err => {
+        document.getElementById("noResults").innerText = "Error loading fines.";
+        document.getElementById("finesTable").style.display = "none";
+        console.error("Error loading fines:", err);
+      });
+  </script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Traffic Fine Management System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body class="home-bg">
+  <header>
+    <h1>Traffic Fine Management System</h1>
+    <p class="subtitle">A Modern Solution for Traffic Offender Management</p>
+  </header>
+  <main>
+    <div class="card">
+      <div class="option-buttons">
+        <button type="button" id="showAddOffenderFine" class="active">Add Offender</button>
+        <button type="button" id="showCheckFine">Check Fine</button>
+        <button type="button" id="showUpdateOffender">Update Details</button>
+      </div>
+      <form id="addOffenderFineForm">
+        <h2>Add Offender</h2>
+        <div class="form-group">
+          <label for="offenderName">Name</label>
+          <input type="text" id="offenderName" placeholder="Full Name" required />
+        </div>
+        <div class="form-group">
+          <label for="offenderLicense">License Number</label>
+          <input type="text" id="offenderLicense" placeholder="License Number" required />
+        </div>
+        <div class="form-group">
+          <label for="offenderAddress">Address</label>
+          <input type="text" id="offenderAddress" placeholder="Address" required />
+        </div>
+        <div class="form-group">
+          <label for="offenderContact">Contact Number</label>
+          <input type="text" id="offenderContact" placeholder="Contact Number" required />
+        </div>
+        <div class="form-group">
+          <label for="offenderRegNum">Vehicle Registration Number</label>
+          <input type="text" id="offenderRegNum" placeholder="e.g. DL01AB1234" required />
+        </div>
+        <div class="form-group">
+          <label for="fineAmountAdd">Fine Amount (₹)</label>
+          <input type="number" id="fineAmountAdd" placeholder="Fine Amount" min="1" required />
+        </div>
+        <div class="form-group">
+          <label for="violationTypeAdd">Violation Type</label>
+          <select id="violationTypeAdd" required>
+            <option value="">Select Violation Type</option>
+            <option value="Overspeeding">Overspeeding</option>
+            <option value="Signal Jumping">Signal Jumping</option>
+            <option value="Wrong Parking">Wrong Parking</option>
+            <option value="Helmetless Riding">Helmetless Riding</option>
+            <option value="Overloading">Overloading</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <button type="submit">Add Offender</button>
+      </form>
+      <form id="checkFineForm" style="display:none;">
+        <h2>Check Fine</h2>
+        <div class="form-group">
+          <label for="regNumCheck">Vehicle Registration Number</label>
+          <input type="text" id="regNumCheck" placeholder="e.g. DL01AB1234" required />
+        </div>
+        <div class="form-group">
+          <label for="checkLicense">License Number (optional)</label>
+          <input type="text" id="checkLicense" placeholder="e.g. DL20231234" />
+        </div>
+        <div class="form-group">
+          <label for="checkPhone">Contact Number (optional)</label>
+          <input type="text" id="checkPhone" placeholder="e.g. 9876543210" />
+        </div>
+        <button type="submit">Check Fine</button>
+      </form>
+      <form id="updateOffenderForm" style="display:none;">
+        <h2>Update Offender Details</h2>
+        <div class="form-group">
+          <label for="updateLicense">License Number</label>
+          <input type="text" id="updateLicense" placeholder="License Number" required />
+        </div>
+        <div class="form-group">
+          <label for="updateName">New Name</label>
+          <input type="text" id="updateName" placeholder="Full Name" />
+        </div>
+        <div class="form-group">
+          <label for="updateContact">New Contact Number</label>
+          <input type="text" id="updateContact" placeholder="Contact Number" />
+        </div>
+        <div class="form-group">
+          <label for="updateAddress">New Address</label>
+          <input type="text" id="updateAddress" placeholder="Address" />
+        </div>
+        <button type="submit">Update Details</button>
+      </form>
+      <div id="errorMsg"></div>
+      <div id="resultMsg"></div>
+    </div>
+    <footer>
+      <p>&copy; 2025 Traffic Fine Management System. All rights reserved.</p>
+    </footer>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

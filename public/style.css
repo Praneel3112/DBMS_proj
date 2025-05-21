@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+body {
+    font-family: 'Inter', Arial, sans-serif;
+    background: #f4f6fa;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    color: #222;
+}
+
+header {
+    background: #1a2745;
+    color: #fff;
+    padding: 24px 0 16px 0;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(30,40,90,0.06);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.2rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 80vh;
+    padding: 32px 8px 0 8px;
+}
+
+.card {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 4px 24px rgba(30,40,90,0.08);
+    padding: 32px 28px 24px 28px;
+    max-width: 420px;
+    width: 100%;
+    margin-bottom: 32px;
+}
+
+h2 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 18px;
+    color: #1a2745;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+input[type="password"],
+select {
+    padding: 12px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+    font-size: 1rem;
+    background: #f8fafc;
+    transition: border 0.2s;
+}
+input:focus, select:focus {
+    border: 1.5px solid #1a2745;
+    outline: none;
+    background: #fff;
+}
+
+button {
+    background: #1a2745;
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    padding: 13px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(30,40,90,0.08);
+}
+button:hover, button:focus {
+    background: #22336b;
+}
+
+.option-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-bottom: 28px;
+}
+.option-buttons button {
+    background: #e5e9f2;
+    color: #1a2745;
+    border: 1px solid #cfd8e3;
+    box-shadow: none;
+    font-weight: 500;
+    padding: 10px 24px;
+    transition: background 0.2s, color 0.2s;
+}
+.option-buttons button.active, .option-buttons button:focus {
+    background: #1a2745;
+    color: #fff;
+    border: 1.5px solid #1a2745;
+}
+
+#errorMsg, #resultMsg, #noResults, #responseMsg {
+    color: #b3261e;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 1rem;
+}
+
+.success {
+    color: #1a7f37 !important;
+}
+
+/* Table styles for results */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 18px;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(30,40,90,0.07);
+}
+thead {
+    background: #1a2745;
+    color: #fff;
+}
+th, td {
+    padding: 13px 10px;
+    text-align: left;
+    border-bottom: 1px solid #e5e9f2;
+    font-size: 1rem;
+}
+tr:nth-child(even) {
+    background-color: #f4f6fa;
+}
+tr:hover {
+    background-color: #e5e9f2;
+    transition: background 0.2s;
+}
+
+@media (max-width: 600px) {
+    .card {
+        padding: 18px 6px 16px 6px;
+        max-width: 98vw;
+    }
+    main {
+        padding: 12px 2px 0 2px;
+    }
+    th, td {
+        font-size: 0.95rem;
+        padding: 8px 4px;
+    }
+}
